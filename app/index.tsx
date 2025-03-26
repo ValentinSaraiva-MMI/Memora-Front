@@ -20,7 +20,7 @@ export default function Index() {
         }}
       >
 
-        TEST BRANCH
+        TEST BRANCH footer
 
       </Text>
 
