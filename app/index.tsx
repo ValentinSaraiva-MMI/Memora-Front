@@ -1,6 +1,10 @@
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
+import { useRouter } from "expo-router";
+import Footer from "./compoments/footer";
 
 export default function Index() {
+  const router = useRouter();
+
   return (
     <View
       style={{
@@ -9,7 +13,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/indexxssss.tsx to edit this screen.</Text>
+      <Text>Edit app/index.tsx to edit this screen.</Text>
     </View>
-  );
+  )
 }
