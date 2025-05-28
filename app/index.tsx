@@ -32,7 +32,7 @@ export default function Index() {
   }, []);
 
   const fetchAlbums = () => {
-    fetch("https://ff26-85-169-87-98.ngrok-free.app/albums")
+    fetch("https://2990-85-169-87-98.ngrok-free.app/albums")
       .then((response) => response.json())
       .then((data) => {
         setAlbums(data);
