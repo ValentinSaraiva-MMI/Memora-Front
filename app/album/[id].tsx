@@ -2,6 +2,9 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { View, Text, ScrollView, TextInput, Button, Alert, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { Video, ResizeMode } from "expo-av";
+
+
 
 type Media = {
     id: number;
@@ -63,6 +66,16 @@ export default function AlbumPage() {
                             <Text>Type : {media.type}</Text>
                             {media.type === "image" && (
                                 <Image source={{ uri: media.url }} style={{ width: 200, height: 200 }} />
+                            )}
+
+                            {media.type === "video" && (
+                                <Video
+                                    source={{ uri: media.url }}
+                                    style={{ width: 300, height: 200 }}
+                                    useNativeControls
+                                    resizeMode={ResizeMode.CONTAIN}
+                                    shouldPlay={false}
+                                />
                             )}
                             <Text>URL : {media.url}</Text>
                             {media.description ? <Text>Description : {media.description}</Text> : null}
