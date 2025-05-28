@@ -13,14 +13,17 @@ type Albums = {
 export default function Index() {
   const [albums, setAlbums] = useState<Albums[]>([]);
   const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const checkAuth = async () => {
       const user = await AsyncStorage.getItem("user");
       if (!user) {
-        router.replace("/auth"); // Redirige vers la page de connexion
+        router.replace("/auth");
       } else {
+        const parsedUser = JSON.parse(user);
+        setUsername(parsedUser.pseudo);
         fetchAlbums();
       }
     };
@@ -29,7 +32,7 @@ export default function Index() {
   }, []);
 
   const fetchAlbums = () => {
-    fetch("https://ada0-2a02-842a-32c2-d201-81e7-3df4-7841-dff2.ngrok-free.app/albums")
+    fetch("https://ff26-85-169-87-98.ngrok-free.app/albums")
       .then((response) => response.json())
       .then((data) => {
         setAlbums(data);
@@ -46,6 +49,10 @@ export default function Index() {
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 20 }}>
+      <Text style={{ fontSize: 18, marginBottom: 10 }}>
+        Bonjour {username}
+      </Text>
+
       <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>Albums créés</Text>
 
       {loading ? (
@@ -54,9 +61,16 @@ export default function Index() {
         <ScrollView>
           {albums.length > 0 ? (
             albums.map((album) => (
-              <Text key={album.id} style={{ fontSize: 16, marginVertical: 5 }}>
-                {album.title} - {album.description} - {album.category}
-              </Text>
+              <View key={album.id} style={{ marginBottom: 10 }}>
+                <Text style={{ fontSize: 16 }}>
+                  {album.title} - {album.description} - {album.category}
+                </Text>
+                <Button
+                  title="Voir l'album"
+                  // @ts-ignore
+                  onPress={() => router.push(`/album/${album.id}`)}
+                />
+              </View>
             ))
           ) : (
             <Text>Aucun album trouvé.</Text>

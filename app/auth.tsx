@@ -24,7 +24,7 @@ export default function Auth() {
         }
 
         const endpoint = mode === "login" ? "/login" : "/register";
-        const url = "https://ada0-2a02-842a-32c2-d201-81e7-3df4-7841-dff2.ngrok-free.app" + endpoint;
+        const url = "https://ff26-85-169-87-98.ngrok-free.app" + endpoint;
 
         const payload = mode === "login" ? { email, password } : { pseudo, email, password };
 
